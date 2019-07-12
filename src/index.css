@@ -3,3 +3,10 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+.main-container {
+  width: 80%;
+  height: 30rem;
+  background-color: darkmagenta;
+  margin: 2rem auto;
+}
