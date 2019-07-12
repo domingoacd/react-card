@@ -9,6 +9,18 @@ class Clock extends React.Component {
       date: new Date()
     };
   }
+  
+  startTimer() {
+    this.setState({
+      date: new Date()
+    });
+  }
+  componentDidMount() {
+    this.timerId = setInterval(() => this.startTimer(), 1000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timerId);
+  }
   render() {
     return (
       <h1>Time is: {this.state.date.toLocaleTimeString()}</h1>     
