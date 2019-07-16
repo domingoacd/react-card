@@ -1,6 +1,43 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.scss';
+
+class CharacterImage extends React.Component {
+  render() {
+    return (
+      <div className="characterImage">
+        
+      </div>
+    )
+  };
+}
+class CharacterInfo extends React.Component {
+  render() {
+    return (
+      <div className="characterInfo">
+
+      </div>
+    )
+  };
+}
+class CharacterSelection extends React.Component {
+  render() {
+    return (
+      <div className="characterSelection">
+
+      </div>
+    )
+  };
+}
+class MenuSide extends React.Component {
+  render() {
+    return (
+      <div className="menuSide">
+
+      </div>
+    )
+  };
+}
 
 class Card extends React.Component {
   constructor(props) {
@@ -13,19 +50,16 @@ class Card extends React.Component {
   render() {
     return (
       <section className="main-container">
-        <Character-image />
-        <Character-info />
-        <Menu-side />
+        <CharacterImage />
+        <CharacterInfo />
+        <CharacterSelection />
+        <MenuSide />
       </section>   
     );
   }
 }
 
-function timer() {
-  ReactDOM.render(
-    <Card />,
-    document.getElementById('root')
-  );
-}
-
-setInterval(timer, 1000);
+ReactDOM.render(
+  <Card />,
+  document.getElementById('root')
+);
