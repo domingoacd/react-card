@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import superman from './img/superman.png';
 import menu_button from './img/menu.png';
+import logo_facebook from './img/facebook-logo.png';
+import logo_instagram from './img/instagram-logo.png';
+import logo_youtube from './img/youtube.png';
 
 class CharacterImage extends React.Component {
   render() {
@@ -53,17 +56,17 @@ class MenuSide extends React.Component {
         </div>
         <div className="menu__volume">
           <div className="menu__volume__inner">
-            <p>Vol</p>
-            <p>75</p>
+            <p>Vol.</p>
               <div className="progressBar">
                 <div className="progressBar__inner"></div>
               </div>
+            <p>75</p>
             <p>|</p>
-            <p>100</p>
+            <p className="fade_text">100</p>
           </div>
         </div>
         <div className="menu__social">
-
+          <a href="https://www.google.com">Hey</a>
         </div>
         <div className="menu__language">
           <select name="" id="" className="languages_box">

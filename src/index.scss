@@ -54,20 +54,28 @@ $color-fade: #D1D0C8;
       align-items: center;
       &__inner {
         display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.7rem;
+        font-family: $font-normal;
         transform: rotate(270deg);
         position: absolute;
-
+        width: 13rem;
+        padding: 0 5%;
         & .progressBar {
           width: 7rem;
-          height: 0.5rem;
+          height: 0.2rem;
           display: flex;
           align-items: center;
-          background-color: $color-fade;
+          background-color: #D1D0C8;
           &__inner {
             width: 70%;
-            height: 10%;
-            background-color: $color-text;
+            height: 80%;
+            background-color: #878581;
           }
+        }
+        & .fade_text {
+          color: $color-fade;
         }
       }
     }
