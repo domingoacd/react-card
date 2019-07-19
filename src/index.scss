@@ -83,6 +83,19 @@ $color-fade: #D1D0C8;
       width: 100%;
       height: 25%;
       border-bottom: 1px solid $color-secondary;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      & .social-logo {
+        width: 1rem;
+        &--facebook {
+          margin-bottom: 1rem;
+        }
+        &--instagram {
+          margin-bottom: 1rem;
+        }
+      }
     }
     &__language {
       height: 15%;

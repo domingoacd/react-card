@@ -66,7 +66,15 @@ class MenuSide extends React.Component {
           </div>
         </div>
         <div className="menu__social">
-          <a href="https://www.google.com">Hey</a>
+          <a href="https://www.facebook.com">
+            <img src={logo_facebook} alt="" className="social-logo social-logo--facebook" />
+          </a>
+          <a href="https://www.instagram.com">
+            <img src={logo_instagram} alt="" className="social-logo social-logo--instagram" />
+          </a>
+          <a href="https://www.youtube.com">
+            <img src={logo_youtube} alt="" className="social-logo social-logo--youtube" />
+          </a>
         </div>
         <div className="menu__language">
           <select name="" id="" className="languages_box">
