@@ -14,7 +14,9 @@ $color-fade: #D1D0C8;
 .main-container {
   width: 80%;
   max-width: 1085px;
-  height: 30rem;
+  height: 70vh;
+  min-height: 30rem;
+  max-height: 40rem;
   background-color:$color-main;
   margin: 2rem auto;
   border-radius: 8px;
