@@ -2,10 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import superman from './img/superman.png';
+import spiderman from './img/spiderman.png';
+import wolverine from './img/wolverine.png';
 import menu_button from './img/menu.png';
 import logo_facebook from './img/facebook-logo.png';
 import logo_instagram from './img/instagram-logo.png';
 import logo_youtube from './img/youtube.png';
+import image_next from './img/next.png';
+import image_prev from './img/back.png';
 
 class CharacterImage extends React.Component {
   render() {
@@ -42,7 +46,24 @@ class CharacterSelection extends React.Component {
   render() {
     return (
       <div className="characterSelection">
-
+        <button className="prev_btn">
+          <img src={image_prev} alt="" />
+          PRV
+        </button>
+        <div className="image_slide">
+          <div className="image_slide__inner">
+            <img className="thumb thumb--1 active" src={superman} alt="" />
+            <img className="thumb thumb--2" src={wolverine} alt="" />
+            <img className="thumb thumb--3" src={spiderman} alt="" />
+            <img className="thumb thumb--1" src={superman} alt="" />
+            <img className="thumb thumb--2" src={wolverine} alt="" />
+            <img className="thumb thumb--3" src={spiderman} alt="" />
+          </div>
+        </div>
+        <button className="next_btn">
+          NXT
+          <img src={image_next} alt="" />
+        </button>
       </div>
     )
   };
