@@ -11,6 +11,7 @@ import logo_youtube from './img/youtube.png';
 import image_next from './img/next.png';
 import image_prev from './img/back.png';
 
+
 class CharacterImage extends React.Component {
   render() {
     return (
@@ -43,10 +44,51 @@ class CharacterInfo extends React.Component {
   };
 }
 class CharacterSelection extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentSelectedCharacter : 0,
+      amountOfCharacters : props.characters.length - 1
+    };
+    
+    this.moveSlideBackwards = this.moveSlideBackwards.bind(this);
+    this.moveSlideForward = this.moveSlideForward.bind(this);
+   
+  }
+
+  moveSlideBackwards() {
+    const characterNumber = this.state.currentSelectedCharacter === 0 ?
+                              this.state.amountOfCharacters : this.state.currentSelectedCharacter - 1;
+    const componentNode = ReactDOM.findDOMNode(this);
+    const thumbs = componentNode.querySelectorAll('img.thumb');
+    thumbs[this.state.currentSelectedCharacter].classList.remove('active');
+    thumbs[characterNumber].classList.add('active');
+    this.setState({
+      currentSelectedCharacter: characterNumber
+    });
+  }
+  moveSlideForward() {
+    const characterNumber = this.state.currentSelectedCharacter === this.state.amountOfCharacters ?
+                              0 : this.state.currentSelectedCharacter + 1;
+    const componentNode = ReactDOM.findDOMNode(this);
+    const thumbs = componentNode.querySelectorAll('img.thumb');
+    thumbs[this.state.currentSelectedCharacter].classList.remove('active');
+    thumbs[characterNumber].classList.add('active');
+    this.setState({
+      currentSelectedCharacter: characterNumber
+    });
+  }
+
+  componentDidMount() {
+    this.setState({
+      currentSelectedCharacter: 0
+    });
+  }
+
   render() {
     return (
       <div className="characterSelection">
-        <button className="prev_btn">
+        <button className="prev_btn" onClick={this.moveSlideBackwards}>
           <img src={image_prev} alt="" />
           PRV
         </button>
@@ -60,7 +102,7 @@ class CharacterSelection extends React.Component {
             <img className="thumb thumb--3" src={spiderman} alt="" />
           </div>
         </div>
-        <button className="next_btn">
+        <button className="next_btn" onClick={this.moveSlideForward}>
           NXT
           <img src={image_next} alt="" />
         </button>
@@ -112,16 +154,24 @@ class Card extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: new Date()
+      charactersList: [
+        "superman",
+        "spiderman",
+        "wolverine",
+        "superman",
+        "spiderman",
+        "wolverine"
+      ]
     };
   }
   
+
   render() {
     return (
       <section className="main-container">
         <CharacterImage />
         <CharacterInfo />
-        <CharacterSelection />
+        <CharacterSelection characters={this.state.charactersList} />
         <MenuSide />
       </section>   
     );
