@@ -71,9 +71,15 @@ class CharacterSelection extends React.Component {
     const characterNumber = this.state.currentSelectedCharacter === this.state.amountOfCharacters ?
                               0 : this.state.currentSelectedCharacter + 1;
     const componentNode = ReactDOM.findDOMNode(this);
+    const sl = componentNode.querySelector('.image_slide');
     const thumbs = componentNode.querySelectorAll('img.thumb');
     thumbs[this.state.currentSelectedCharacter].classList.remove('active');
     thumbs[characterNumber].classList.add('active');
+    console.log(thumbs[characterNumber].getBoundingClientRect());
+    console.log(sl.getBoundingClientRect());
+    if(sl.getBoundingClientRect().right < thumbs[characterNumber].getBoundingClientRect().right) {
+      sl.style.transform = `translateX(${sl.getBoundingClientRect().right - thumbs[characterNumber].getBoundingClientRect().right + 10}px)`;
+    }
     this.setState({
       currentSelectedCharacter: characterNumber
     });

@@ -230,7 +230,7 @@ $color-fade: #D1D0C8;
     }
     & .image_slide {
       width: 80%;
-      overflow: hidden;
+      overflow-x: hidden;
 
       &__inner {
         height: 100%;
@@ -240,7 +240,7 @@ $color-fade: #D1D0C8;
           height: 90%;
           width: 22%;
           opacity: 0.2;
-          
+          cursor: pointer;
           &.active {
             opacity: 1
           }
