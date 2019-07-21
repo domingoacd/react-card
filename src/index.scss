@@ -236,6 +236,7 @@ $color-fade: #D1D0C8;
         height: 100%;
         display: flex;
         align-items: center;
+        transition: transform 0.2s;
         & .thumb {
           height: 90%;
           width: 22%;
