@@ -56,33 +56,57 @@ class CharacterSelection extends React.Component {
    
   }
 
+  getTranslatedPixelsFromElement(element) {
+    const translatedRule = element.style.transform;
+    if (translatedRule.toLowerCase().includes("translate")) {
+      return Number(translatedRule.slice(translatedRule.indexOf('(')+1,translatedRule.indexOf('p')));
+    }
+    return 0;
+  }
   moveSlideBackwards() {
-    const characterNumber = this.state.currentSelectedCharacter === 0 ?
+    const currentCharacterNumber = this.state.currentSelectedCharacter; 
+    const isTheFirstCharacter = currentCharacterNumber === 0;
+    const nextCharacterNumber = isTheFirstCharacter ?
                               this.state.amountOfCharacters : this.state.currentSelectedCharacter - 1;
     const componentNode = ReactDOM.findDOMNode(this);
+    const sliderContainer = componentNode.querySelector('.image_slide');
+    const innerSlider = componentNode.querySelector('.image_slide__inner');
     const thumbs = componentNode.querySelectorAll('img.thumb');
+    const characterOverflowsSlide = sliderContainer.getBoundingClientRect().left > thumbs[nextCharacterNumber].getBoundingClientRect().left;
+    const pixelsTranslated = this.getTranslatedPixelsFromElement(innerSlider); 
     thumbs[this.state.currentSelectedCharacter].classList.remove('active');
-    thumbs[characterNumber].classList.add('active');
+    thumbs[nextCharacterNumber].classList.add('active');
+
+    if(characterOverflowsSlide) {
+      innerSlider.style.transform = `translateX(${pixelsTranslated + (sliderContainer.getBoundingClientRect().left - thumbs[nextCharacterNumber].getBoundingClientRect().left)}px)`;
+    } else if (isTheFirstCharacter) {
+      innerSlider.style.transform = `translateX(-${thumbs[thumbs.length - 1].getBoundingClientRect().right - sliderContainer.getBoundingClientRect().right }px)`;
+    }
+
     this.setState({
-      currentSelectedCharacter: characterNumber
+      currentSelectedCharacter: nextCharacterNumber
     });
   }
   moveSlideForward() {
-    const characterNumber = this.state.currentSelectedCharacter === this.state.amountOfCharacters ?
-                              0 : this.state.currentSelectedCharacter + 1;
+    const currentCharacterNumber = this.state.currentSelectedCharacter; 
+    const isTheLastCharacter = currentCharacterNumber === this.state.amountOfCharacters;
+    const nextCharacterNumber =  isTheLastCharacter ? 0 : currentCharacterNumber + 1;
     const componentNode = ReactDOM.findDOMNode(this);
-    const dd = componentNode.querySelector('.image_slide');
-    const sl = componentNode.querySelector('.image_slide__inner');
+    const sliderContainer = componentNode.querySelector('.image_slide');
+    const innerSlider = componentNode.querySelector('.image_slide__inner');
     const thumbs = componentNode.querySelectorAll('img.thumb');
-    thumbs[this.state.currentSelectedCharacter].classList.remove('active');
-    thumbs[characterNumber].classList.add('active');
-    console.log(thumbs[characterNumber].getBoundingClientRect());
-    console.log(sl.getBoundingClientRect());
-    if(dd.getBoundingClientRect().right < thumbs[characterNumber].getBoundingClientRect().right) {
-      sl.style.transform = `translateX(${sl.getBoundingClientRect().right - thumbs[characterNumber].getBoundingClientRect().right + 10}px)`;
+    const characterOverflowsSlide = sliderContainer.getBoundingClientRect().right < thumbs[nextCharacterNumber].getBoundingClientRect().right;
+
+    thumbs[currentCharacterNumber].classList.remove('active');
+    thumbs[nextCharacterNumber].classList.add('active');
+    
+    if(characterOverflowsSlide) {
+      innerSlider.style.transform = `translateX(-${thumbs[nextCharacterNumber].getBoundingClientRect().right - innerSlider.getBoundingClientRect().right + 20}px)`;
+    } else if (isTheLastCharacter) {
+      innerSlider.style.transform = "unset";
     }
     this.setState({
-      currentSelectedCharacter: characterNumber
+      currentSelectedCharacter: nextCharacterNumber
     });
   }
 
@@ -102,10 +126,12 @@ class CharacterSelection extends React.Component {
         <div className="image_slide">
           <div className="image_slide__inner">
             <img className="thumb thumb--1 active" src={superman} alt="" />
-            <img className="thumb thumb--2" src={wolverine} alt="" />
-            <img className="thumb thumb--3" src={spiderman} alt="" />
+            <img className="thumb thumb--2" src={spiderman} alt="" />
+            <img className="thumb thumb--3" src={wolverine} alt="" />
             <img className="thumb thumb--1" src={superman} alt="" />
-            <img className="thumb thumb--2" src={wolverine} alt="" />
+            <img className="thumb thumb--2" src={spiderman} alt="" />
+            <img className="thumb thumb--3" src={wolverine} alt="" />
+            <img className="thumb thumb--3" src={superman} alt="" />
             <img className="thumb thumb--3" src={spiderman} alt="" />
           </div>
         </div>
@@ -167,7 +193,9 @@ class Card extends React.Component {
         "wolverine",
         "superman",
         "spiderman",
-        "wolverine"
+        "wolverine",
+        "superman",
+        "spiderman"
       ]
     };
   }
