@@ -167,10 +167,12 @@ $color-fade: #D1D0C8;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     img {
       width: 64%;
+      min-width: 20rem;
       position: absolute;
-      right: 3rem;
+      right: 2rem;
       bottom: -1.7rem;
       z-index: 1;
     }
