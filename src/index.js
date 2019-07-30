@@ -11,12 +11,64 @@ import logo_youtube from './img/youtube.png';
 import image_next from './img/next.png';
 import image_prev from './img/back.png';
 
+class CharacterHolder extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      key: props.characterData.code,
+      image: props.characterData.image,
+      title: props.characterData.title,
+      name: props.characterData.name,
+      comic_house: props.characterData.comic_house,
+      info: props.characterData.info,
+      biography: props.characterData.biography,
+      enemies: props.characterData.enemies,
+      partnerships: props.characterData.partnerships,
+      active: false 
+      
+    }
+
+    this.manageClick = this.manageClick.bind(this);
+  }
+
+  manageClick() {
+    this.setState({active:true});
+    return(
+      <CharacterImage 
+        imageToShow={this.state.image} 
+        altText={this.state.title}
+      />
+    )
+  }
+
+  render() {
+    return (
+      <img 
+        className={`thumb ${this.state.active ? "active": ""}`} 
+        src={this.state.image} 
+        alt={this.state.title} 
+        key={this.state.key}
+        onClick = {this.manageClick}  
+      />
+    )
+  }
+}
 
 class CharacterImage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      image: props.imageToShow,
+      altText: props.altText
+    }
+  }
   render() {
     return (
       <div className="characterImage">
-        <img src={superman} alt="superman_picture" />
+        <img 
+          src={this.state.image == "" ? superman : this.state.image} 
+          alt={this.state.altText == "" ? "Man of Steel" : this.state.altText} 
+        />
         <div className="email_box">
           example@something.com
         </div>
@@ -64,6 +116,7 @@ class CharacterSelection extends React.Component {
     }
     return 0;
   }
+
   moveSlideBackwards() {
     const currentCharacterNumber = this.state.currentSelectedCharacter; 
     const isTheFirstCharacter = currentCharacterNumber === 0;
@@ -88,6 +141,7 @@ class CharacterSelection extends React.Component {
       currentSelectedCharacter: nextCharacterNumber
     });
   }
+
   moveSlideForward() {
     const currentCharacterNumber = this.state.currentSelectedCharacter; 
     const isTheLastCharacter = currentCharacterNumber === this.state.amountOfCharacters;
@@ -118,6 +172,13 @@ class CharacterSelection extends React.Component {
   }
 
   render() {
+      const charactersImages = this.state.characters.map((character, index) => {
+        return (
+          <CharacterHolder 
+            characterData={character} 
+            key={character.code}/>)
+      });
+    
     return (
       <div className="characterSelection">
         <button className="prev_btn" onClick={this.moveSlideBackwards}>
@@ -126,14 +187,17 @@ class CharacterSelection extends React.Component {
         </button>
         <div className="image_slide">
           <div className="image_slide__inner">
-            <img className="thumb thumb--1 active" src={superman} alt="" onClick={this.props.manageClick}/>
+            {
+              charactersImages
+            /* <img className="thumb thumb--1 active" src={superman} alt="" onClick={this.props.manageClick}/>
             <img className="thumb thumb--2" src={spiderman} alt="" />
             <img className="thumb thumb--3" src={wolverine} alt="" />
             <img className="thumb thumb--1" src={superman} alt="" />
             <img className="thumb thumb--2" src={spiderman} alt="" />
             <img className="thumb thumb--3" src={wolverine} alt="" />
             <img className="thumb thumb--3" src={superman} alt="" />
-            <img className="thumb thumb--3" src={spiderman} alt="" />
+            <img className="thumb thumb--3" src={spiderman} alt="" /> */
+            }
           </div>
         </div>
         <button className="next_btn" onClick={this.moveSlideForward}>
@@ -266,13 +330,14 @@ class Card extends React.Component {
   }
   
   changeCharacter(event) {
-    console.log("hey->", event.currentTarget);
+    const characterClicked = event.target;
+    console.log("hey->", characterClicked.props);
   }
 
   render() {
     return (
       <section className="main-container">
-        <CharacterImage />
+        <CharacterImage imageToShow="" altText=""/>
         <CharacterInfo />
         <CharacterSelection characters={this.state.charactersList} manageClick={this.changeCharacter}/>
         <MenuSide />
