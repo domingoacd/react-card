@@ -18,18 +18,12 @@ export default class CharacterHolder extends React.Component {
 
     }
 
-    //this.manageClick = this.manageClick.bind(this);
+    this.manageClick = this.manageClick.bind(this);
   }
 
-  // manageClick() {
-  //   this.setState({active:true});
-  //   return(
-  //     <CharacterImage 
-  //       imageToShow={this.state.image} 
-  //       altText={this.state.title}
-  //     />
-  //   )
-  // }
+   manageClick() {
+     this.props.click(this);
+   }
 
   render() {
     return (
@@ -38,7 +32,7 @@ export default class CharacterHolder extends React.Component {
         src={this.state.image}
         alt={this.state.title}
         key={this.state.key}
-        onClick={this.props.click}
+        onClick={this.manageClick}
       />
     )
   }

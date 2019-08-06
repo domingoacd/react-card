@@ -23,7 +23,8 @@ export default class Card extends React.Component {
                 interdum fringilla, diam massa rutrum nibh, id condimentum purus urna nec turpis.`,
           biography: "https://www.google.com",
           enemies: "https://www.google.com",
-          partnerships: "https://www.google.com"
+          partnerships: "https://www.google.com",
+          isActive: false
         },
         {
           code: "001",
@@ -35,7 +36,8 @@ export default class Card extends React.Component {
                 interdum fringilla, diam massa rutrum nibh, id condimentum purus urna nec turpis.`,
           biography: "https://www.facebook.com",
           enemies: "https://www.facebook.com",
-          partnerships: "https://www.facebook.com"
+          partnerships: "https://www.facebook.com",
+          isActive: false
         },
         {
           code: "002",
@@ -47,7 +49,8 @@ export default class Card extends React.Component {
                 interdum fringilla, diam massa rutrum nibh, id condimentum purus urna nec turpis.`,
           biography: "https://www.twitter.com",
           enemies: "https://www.twitter.com",
-          partnerships: "https://www.twitter.com"
+          partnerships: "https://www.twitter.com",
+          isActive: false
         },
         {
           code: "003",
@@ -59,7 +62,8 @@ export default class Card extends React.Component {
                 interdum fringilla, diam massa rutrum nibh, id condimentum purus urna nec turpis.`,
           biography: "https://www.google.com",
           enemies: "https://www.google.com",
-          partnerships: "https://www.google.com"
+          partnerships: "https://www.google.com",
+          isActive: false
         },
         {
           code: "004",
@@ -71,7 +75,8 @@ export default class Card extends React.Component {
                 interdum fringilla, diam massa rutrum nibh, id condimentum purus urna nec turpis.`,
           biography: "https://www.facebook.com",
           enemies: "https://www.facebook.com",
-          partnerships: "https://www.facebook.com"
+          partnerships: "https://www.facebook.com",
+          isActive: false
         },
         {
           code: "005",
@@ -83,22 +88,56 @@ export default class Card extends React.Component {
                 interdum fringilla, diam massa rutrum nibh, id condimentum purus urna nec turpis.`,
           biography: "https://www.twitter.com",
           enemies: "https://www.twitter.com",
-          partnerships: "https://www.twitter.com"
+          partnerships: "https://www.twitter.com",
+          isActive: false
         },
       ],
       activeCharacter: ""
     };
+    this.changeCharacter = this.changeCharacter.bind(this);
   }
 
-  changeCharacter(event) {
-    const characterClicked = event.target;
-    console.log("hey->", characterClicked.props);
+  componentDidMount() {
+    this.setState({
+      charactersList: this.state.charactersList.map((character,index) => {
+        if(index === 0) {
+          character.isActive = true;
+        }
+        return character;
+      })
+    });
+  }
+
+  getCharacterImage() {
+    const activeCharacter = this.state.charactersList.find(character => {
+      return character.isActive;
+    });
+
+    if (activeCharacter) {
+      return activeCharacter.image;
+    } 
+    return "";
+  }
+
+  changeCharacter(element) {
+    this.setState({
+      charactersList: this.state.charactersList.map(character => {
+        if (character.code === element.props.characterData.code) {
+          character.isActive = true;
+        } else if (character.isActive) {
+          character.isActive = false;
+        }
+        return character;
+      })
+    });
   }
 
   render() {
     return (
       <section className="main-container">
-        <CharacterImage imageToShow="" altText="" />
+        <CharacterImage imageToShow={this.getCharacterImage()} 
+          altText="" 
+        />
         <CharacterInfo />
         <CharacterSelection characters={this.state.charactersList} manageClick={this.changeCharacter} />
         <MenuSide />

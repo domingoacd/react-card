@@ -14,7 +14,7 @@ export default class CharacterImage extends React.Component {
     return (
       <div className="characterImage">
         <img
-          src={this.state.image == "" ? superman : this.state.image}
+          src={this.state.image}
           alt={this.state.altText == "" ? "Man of Steel" : this.state.altText}
         />
         <div className="email_box">

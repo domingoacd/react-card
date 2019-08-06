@@ -74,11 +74,6 @@ export default class CharacterSelection extends React.Component {
     });
   }
 
-  componentDidMount() {
-    this.setState({
-      currentSelectedCharacter: 0
-    });
-  }
 
   render() {
     const charactersImages = this.state.characters.map((character, index) => {
