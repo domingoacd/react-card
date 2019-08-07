@@ -96,7 +96,7 @@ export default class Card extends React.Component {
     };
     this.changeCharacter = this.changeCharacter.bind(this);
     this.getCharacterImage = this.getCharacterImage.bind(this);
-    this.getCharacterName = this.getCharacterName.bind(this);
+    this.getCharacterTitle = this.getCharacterTitle.bind(this);
   }
 
   componentDidMount() {
@@ -121,13 +121,31 @@ export default class Card extends React.Component {
     return "";
   }
 
-  getCharacterName() {
+  getCharacterTitle() {
     const activeCharacter = this.state.charactersList.find(character => {
       return character.isActive;
     });
 
     if (activeCharacter) {
       return activeCharacter.title;
+    } 
+    return "";
+  }
+  getCharacterInfo() {
+    const activeCharacter = this.state.charactersList.find(character => {
+      return character.isActive;
+    });
+
+    if (activeCharacter) {
+      return {
+        title: activeCharacter.title,
+        name: activeCharacter.name,
+        house: activeCharacter.comic_house,
+        infoText: activeCharacter.info,
+        biographyLink: activeCharacter.biography,
+        enemiesLink: activeCharacter.enemies,
+        partnershipsLink: activeCharacter.partnerships,
+      };
     } 
     return "";
   }
@@ -150,9 +168,11 @@ export default class Card extends React.Component {
       <section className="main-container">
         <CharacterImage 
           imageToShow={this.getCharacterImage()} 
-          altText={this.getCharacterName()} 
+          altText={this.getCharacterTitle()} 
         />
-        <CharacterInfo />
+        <CharacterInfo 
+          data={this.getCharacterInfo()}
+        />
         <CharacterSelection characters={this.state.charactersList} manageClick={this.changeCharacter} />
         <MenuSide />
       </section>
