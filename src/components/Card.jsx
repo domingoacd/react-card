@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import superman from '../img/superman.png';
 import spiderman from '../img/spiderman.png';
 import wolverine from '../img/wolverine.png';
-import CharacterImage from './CharacterImage';
+import CharacterImage from './CharacterImage.jsx';
 import CharacterInfo from './CharacterInfo';
 import CharacterSelection from './CharacterSelection';
 import MenuSide from './MenuSide';
@@ -95,6 +95,8 @@ export default class Card extends React.Component {
       activeCharacter: ""
     };
     this.changeCharacter = this.changeCharacter.bind(this);
+    this.getCharacterImage = this.getCharacterImage.bind(this);
+    this.getCharacterName = this.getCharacterName.bind(this);
   }
 
   componentDidMount() {
@@ -119,6 +121,17 @@ export default class Card extends React.Component {
     return "";
   }
 
+  getCharacterName() {
+    const activeCharacter = this.state.charactersList.find(character => {
+      return character.isActive;
+    });
+
+    if (activeCharacter) {
+      return activeCharacter.title;
+    } 
+    return "";
+  }
+
   changeCharacter(element) {
     this.setState({
       charactersList: this.state.charactersList.map(character => {
@@ -135,8 +148,9 @@ export default class Card extends React.Component {
   render() {
     return (
       <section className="main-container">
-        <CharacterImage imageToShow={this.getCharacterImage()} 
-          altText="" 
+        <CharacterImage 
+          imageToShow={this.getCharacterImage()} 
+          altText={this.getCharacterName()} 
         />
         <CharacterInfo />
         <CharacterSelection characters={this.state.charactersList} manageClick={this.changeCharacter} />
