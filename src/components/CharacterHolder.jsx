@@ -14,7 +14,7 @@ export default class CharacterHolder extends React.Component {
       biography: props.characterData.biography,
       enemies: props.characterData.enemies,
       partnerships: props.characterData.partnerships,
-      active: false
+      active: props.characterData.isActive
 
     }
 
@@ -23,9 +23,13 @@ export default class CharacterHolder extends React.Component {
 
    manageClick() {
      this.props.click(this);
+     this.setState({
+       active: this.props.characterData.isActive
+     });
    }
 
   render() {
+    console.log(this.props);
     return (
       <img
         className={`thumb ${this.state.active ? "active" : ""}`}

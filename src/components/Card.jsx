@@ -173,7 +173,10 @@ export default class Card extends React.Component {
         <CharacterInfo 
           data={this.getCharacterInfo()}
         />
-        <CharacterSelection characters={this.state.charactersList} manageClick={this.changeCharacter} />
+        <CharacterSelection 
+          characters={this.state.charactersList} 
+          manageClick={this.changeCharacter} 
+        />
         <MenuSide />
       </section>
     );

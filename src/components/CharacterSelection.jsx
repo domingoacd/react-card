@@ -81,6 +81,7 @@ export default class CharacterSelection extends React.Component {
         <CharacterHolder
           characterData={character}
           key={character.code}
+          isActive = {character.isActive}
           click={this.props.manageClick} />)
     });
 
