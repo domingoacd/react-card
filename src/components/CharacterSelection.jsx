@@ -53,25 +53,18 @@ export default class CharacterSelection extends React.Component {
 
   moveSlideForward() {
     const currentCharacterNumber = this.state.currentSelectedCharacter;
-    const isTheLastCharacter = currentCharacterNumber === this.state.amountOfCharacters;
-    const nextCharacterNumber = isTheLastCharacter ? 0 : currentCharacterNumber + 1;
     const componentNode = ReactDOM.findDOMNode(this);
     const sliderContainer = componentNode.querySelector('.image_slide');
     const innerSlider = componentNode.querySelector('.image_slide__inner');
     const thumbs = componentNode.querySelectorAll('img.thumb');
-    const characterOverflowsSlide = sliderContainer.getBoundingClientRect().right < thumbs[nextCharacterNumber].getBoundingClientRect().right;
-
-    thumbs[currentCharacterNumber].classList.remove('active');
-    thumbs[nextCharacterNumber].classList.add('active');
-
-    if (characterOverflowsSlide) {
-      innerSlider.style.transform = `translateX(-${thumbs[nextCharacterNumber].getBoundingClientRect().right - innerSlider.getBoundingClientRect().right + 20}px)`;
-    } else if (isTheLastCharacter) {
+    const isTheLastCharacter = thumbs[thumbs.length - 1].getBoundingClientRect().right < sliderContainer.getBoundingClientRect().right;
+    console.log("inner"+innerSlider.offsetWidth);
+    console.log("outer"+sliderContainer.offsetWidth);
+    if (isTheLastCharacter) {
       innerSlider.style.transform = "unset";
+    } else {
+      innerSlider.style.transform = `translateX(-${thumbs[0].offsetWidth}px)`;
     }
-    this.setState({
-      currentSelectedCharacter: nextCharacterNumber
-    });
   }
 
 
