@@ -14,9 +14,7 @@ $color-fade: #D1D0C8;
 .main-container {
   width: 80%;
   max-width: 1085px;
-  height: 70vh;
   min-height: 30rem;
-  max-height: 40rem;
   background-color:$color-main;
   margin: 2rem auto;
   border-radius: 8px;
@@ -167,21 +165,22 @@ $color-fade: #D1D0C8;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     img {
       width: 64%;
       min-width: 20rem;
-      position: absolute;
-      right: 2rem;
-      bottom: -1.7rem;
       z-index: 1;
     }
     .email_box {
       position: absolute;
-      right: 0;
+      right: 1%;
+      top: 1%;
+      z-index: 2;
       font-family: 'Proza Libre', sans-serif;
       font-size: 0.7rem;
       border: 1px solid #E1DED7;
+      background-color: rgba(245, 242, 233, 0.6);
+      box-shadow: 0px 3px 8px rgba(0,0,0,0.5);
       border-top: none;
       border-right: none;
       width: 11rem;
@@ -252,4 +251,19 @@ $color-fade: #D1D0C8;
     }
   }
   
+}
+
+@media screen and (max-width:720px) {
+  .main-container {
+      grid-template-rows: 80px 1fr 60px 1fr;
+      grid-template-areas: "menu menu menu menu menu menu menu menu menu menu menu menu"
+                        "image image image image image image image image image image image image"
+                        "select select select select select select select select select select select select"
+                        "info info info info info info info info info info info info";
+
+      & .menu {
+        flex-direction: row;
+      }
+  }
+
 }
