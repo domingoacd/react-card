@@ -27,44 +27,29 @@ export default class CharacterSelection extends React.Component {
   }
 
   moveSlideBackwards() {
-    const currentCharacterNumber = this.state.currentSelectedCharacter;
-    const isTheFirstCharacter = currentCharacterNumber === 0;
-    const nextCharacterNumber = isTheFirstCharacter ?
-      this.state.amountOfCharacters : this.state.currentSelectedCharacter - 1;
     const componentNode = ReactDOM.findDOMNode(this);
-    const sliderContainer = componentNode.querySelector('.image_slide');
-    const innerSlider = componentNode.querySelector('.image_slide__inner');
     const thumbs = componentNode.querySelectorAll('img.thumb');
-    const characterOverflowsSlide = sliderContainer.getBoundingClientRect().left > thumbs[nextCharacterNumber].getBoundingClientRect().left;
+    const sliderContainer = componentNode.querySelector('.image_slide');
+    const isTheFirstCharacter = 
+                  thumbs[0].getBoundingClientRect().left >= sliderContainer.getBoundingClientRect().left;
+    const innerSlider = componentNode.querySelector('.image_slide__inner');
     const pixelsTranslated = this.getTranslatedPixelsFromElement(innerSlider);
-    thumbs[this.state.currentSelectedCharacter].classList.remove('active');
-    thumbs[nextCharacterNumber].classList.add('active');
 
-    if (characterOverflowsSlide) {
-      innerSlider.style.transform = `translateX(${pixelsTranslated + (sliderContainer.getBoundingClientRect().left - thumbs[nextCharacterNumber].getBoundingClientRect().left)}px)`;
-    } else if (isTheFirstCharacter) {
-      innerSlider.style.transform = `translateX(-${thumbs[thumbs.length - 1].getBoundingClientRect().right - sliderContainer.getBoundingClientRect().right}px)`;
-    }
-
-    this.setState({
-      currentSelectedCharacter: nextCharacterNumber
-    });
+    if (!isTheFirstCharacter) {
+      innerSlider.style.transform = `translateX(${pixelsTranslated + thumbs[0].offsetWidth}px)`;
+    } 
   }
 
   moveSlideForward() {
-    const currentCharacterNumber = this.state.currentSelectedCharacter;
     const componentNode = ReactDOM.findDOMNode(this);
     const sliderContainer = componentNode.querySelector('.image_slide');
     const innerSlider = componentNode.querySelector('.image_slide__inner');
     const thumbs = componentNode.querySelectorAll('img.thumb');
+    const pixelsTranslated = this.getTranslatedPixelsFromElement(innerSlider);
     const isTheLastCharacter = thumbs[thumbs.length - 1].getBoundingClientRect().right < sliderContainer.getBoundingClientRect().right;
-    console.log("inner"+innerSlider.offsetWidth);
-    console.log("outer"+sliderContainer.offsetWidth);
-    if (isTheLastCharacter) {
-      innerSlider.style.transform = "unset";
-    } else {
-      innerSlider.style.transform = `translateX(-${thumbs[0].offsetWidth}px)`;
-    }
+    if (!isTheLastCharacter) {
+      innerSlider.style.transform = `translateX(-${pixelsTranslated*-1 + thumbs[0].offsetWidth}px)`;
+    } 
   }
 
 
