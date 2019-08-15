@@ -6,11 +6,27 @@ import logo_instagram from '../img/instagram-logo.png';
 import logo_youtube from '../img/youtube.png';
 
 export default class MenuSide extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      classes: '',
+      toggled: false
+    }
+    this.toggleMenu = this.toggleMenu.bind(this);
+  }
+  toggleMenu() {
+    console.log('eeee');
+    this.setState({
+      classes: this.state.toggled? "toggle": "",
+      toggled: !this.state.toggled
+    });
+  }
+
   render() {
     return (
-      <div className="menu">
-        <div className="menu__toggle">
-          <img src={menu_button} alt="" />
+      <div className={'menu '+this.state.classes}>
+        <div className="menu__toggle" onClick={this.toggleMenu}>
+          <img  src={menu_button} alt=""/>
         </div>
         <div className="menu__volume">
           <div className="menu__volume__inner">
