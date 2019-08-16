@@ -304,7 +304,9 @@ $color-fade: #D1D0C8;
 
 @media screen and (max-width:570px) { 
   .main-container {
+    width: 95%;
      .menu {
+       justify-content: space-evenly;
       &::before {
         content: "";
         position: absolute;
@@ -321,6 +323,10 @@ $color-fade: #D1D0C8;
         &::before {
           width: 0%;
         }
+      }
+
+      &__volume {
+        display: none;
       }
      }
   }
