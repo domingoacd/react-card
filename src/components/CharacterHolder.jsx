@@ -14,7 +14,6 @@ export default class CharacterHolder extends React.Component {
       biography: props.characterData.biography,
       enemies: props.characterData.enemies,
       partnerships: props.characterData.partnerships,
-      active: props.characterData.isActive,
       extraClasses: ""
 
     }
@@ -23,14 +22,21 @@ export default class CharacterHolder extends React.Component {
   }
 
    manageClick() {
-     this.props.click(this);
+    //  const isActive = this.props.isActive;
+    this.props.click(this);
+    //  this.setState({
+    //    extraClasses: isActive? "active": ""
+    //  });
+   }
+   activeClass() {
+     return this.props.isActive ? "active": "";
    }
 
   render() {
     console.log(this.props);
     return (
       <img
-        className={`thumb ${this.state.extraClasses}`}
+        className={`thumb ${this.activeClass()}`}
         src={this.state.image}
         alt={this.state.title}
         key={this.state.key}
