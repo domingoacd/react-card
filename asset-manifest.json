@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/react-card/static/css/main.e6c203a5.chunk.css",
+    "main.js": "/react-card/static/js/main.38074728.chunk.js",
+    "main.js.map": "/react-card/static/js/main.38074728.chunk.js.map",
+    "runtime~main.js": "/react-card/static/js/runtime~main.683265bf.js",
+    "runtime~main.js.map": "/react-card/static/js/runtime~main.683265bf.js.map",
+    "static/js/2.da95ac23.chunk.js": "/react-card/static/js/2.da95ac23.chunk.js",
+    "static/js/2.da95ac23.chunk.js.map": "/react-card/static/js/2.da95ac23.chunk.js.map",
+    "index.html": "/react-card/index.html",
+    "precache-manifest.50e87283c9c28fd3abd73d4938050148.js": "/react-card/precache-manifest.50e87283c9c28fd3abd73d4938050148.js",
+    "service-worker.js": "/react-card/service-worker.js",
+    "static/css/main.e6c203a5.chunk.css.map": "/react-card/static/css/main.e6c203a5.chunk.css.map",
+    "static/media/instagram-logo.png": "/react-card/static/media/instagram-logo.32b0daa6.png",
+    "static/media/menu.png": "/react-card/static/media/menu.73780714.png",
+    "static/media/spiderman.png": "/react-card/static/media/spiderman.7c123aaf.png",
+    "static/media/superman.png": "/react-card/static/media/superman.db135ff1.png",
+    "static/media/wolverine.png": "/react-card/static/media/wolverine.02a68eeb.png"
+  }
+}
